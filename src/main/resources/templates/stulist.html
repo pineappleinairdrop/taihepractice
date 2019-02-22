@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<!-- 公共头 -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <!--<meta http-equiv="Cache-Control"content="no-siteapp"/>-->
+    <title>学生列表</title>
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html"/>
+    <![endif]-->
+    <!--<link rel="shortcut icon" th:href="@{/assets/favicon.ico}">-->
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/datatables/1.10.16/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+    <link th:href="@{/css/style.min.css}" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--<script src="https://cdn.bootcss.com/jeditable.js/2.0.3/jquery.jeditable.js"></script>-->
+    <script src="https://cdn.bootcss.com/datatables/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.bootcss.com/datatables/1.10.16/js/dataTables.bootstrap.min.js"></script>
+</head>
+<!--至此处结束-->
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>作品列表
+                        <small>分类，查找</small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <!--<a class="collapse-link">-->
+                            <!--<i class="fa fa-chevron-up"></i>-->
+                        <!--</a>-->
+                        <a th:href="@{/poemList}">
+                            <i class="fa fa-refresh"></i>
+                        </a>
+                        <!--<ul class="dropdown-menu dropdown-user">-->
+                            <!--<li><a th:href="@{/poemList}">刷新</a>-->
+                            <!--</li>-->
+                            <!--&lt;!&ndash;<li><a href="#">选项2</a>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</li>&ndash;&gt;-->
+                        <!--</ul>-->
+                        <!--<a class="close-link">-->
+                            <!--<i class="fa fa-times"></i>-->
+                        <!--</a>-->
+                    </div>
+                </div>
+                <div class="ibox-content">
+
+                    <table class="table table-striped table-bordered table-hover" id="poemList">
+                        <thead>
+                        <tr>
+                            <th>编号</th>
+                            <th>标题</th>
+                            <th>诗人</th>
+                            <th>年代</th>
+                            <th>地点</th>
+                            <!--<th>诗人</th>-->
+                            <th>操作</th>
+                            <th class="hide">正文</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="poem,iterStat:${poems}">
+                            <td th:text="${poem.poemId}"></td>
+                            <td th:text="${poem.title}"></td>
+                            <td th:text="${poem.poet}"></td>
+                            <td th:text="${poem.year}"></td>
+                            <td th:text="${poem.place}"></td>
+                            <td>
+                                <a class="btn btn-info btn-sm" th:href="@{'/modifyPoem/'+${poem.poemId}}">修改</a> <!-- th:href="@{'/modifyPoem/'+${poem.poemId}}" th:id="${iterStat.count}" data-toggle="modal" data-target="#modifyFormModal" -->
+                                &#12288&#12288&#12288
+                                <a class="btn btn-danger btn-sm" th:href="@{'/deletePoem/'+${poem.poemId}}">删除</a>
+                            </td>
+                            <td th:text="${poem.text}" class="hide"></td>
+                        </tr>
+                        <tfoot>
+                             <tr>
+                                 <th>number</th>
+                                 <th>title</th>
+                                 <th>poet</th>
+                                 <th>year</th>
+                                 <th>position</th>
+                                 <th>action</th>
+                                 <th class="hide">text</th>
+                             </tr>
+                        </tfoot>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--弹出框开始-->
+<!--<div class="modal fade" role="dialog" tabindex="-1" id="modifyFormModal" aria-labelledby="myModalLabel" aria-hidden="true">-->
+    <!--<div class="modal-dialog">-->
+        <!--<div class="modal-content">-->
+            <!--<div class="modal-header">-->
+                <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×-->
+                <!--</button>-->
+                <!--<h4 class="modal-title" id="myModalLabel">-->
+                    <!--修改记录-->
+                <!--</h4>-->
+            <!--</div>-->
+            <!--<div class="modal-body">-->
+                <!--<form class="form-horizontal" method="post" role="form" th:action="@{/doModifyPoem}" onsubmit="return toValidate()" >-->
+                    <!--&lt;!&ndash;<h3 class="text-center"></h3>&ndash;&gt;-->
+                    <!--<div class="form-group hide">-->
+                        <!--<div class="col-sm-10">-->
+                            <!--<input type="text"  class="form-control" id="poemId" name="poemId"-->
+                                   <!--autofocus="autofocus"   required=""/>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+                        <!--<label for="title" class="col-sm-2 control-label">标题</label>-->
+                        <!--<div class="col-sm-10">-->
+                            <!--<input type="text"  class="form-control" id="title" name="title"-->
+                                   <!--autofocus="autofocus"   required=""/>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+                        <!--<label for="year" class="col-sm-2 control-label">年份</label>-->
+                        <!--<div class="col-sm-10">-->
+                            <!--<input type="text"  class="form-control" id="year" name="year"-->
+                                   <!--autofocus="autofocus"    required=""/>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+                        <!--<label for="text" class="col-sm-2 control-label">正文</label>-->
+                        <!--<div class="col-sm-10">-->
+                    <!--<textarea   class="form-control" id="text" name="text"-->
+                                <!--rows="5" autofocus="autofocus"  required=""></textarea>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+                        <!--<label for="name" class="col-sm-2 control-label">作者</label>-->
+                        <!--<div class="col-sm-10">-->
+                            <!--<input type="text"  class="form-control" id="name" name="name"-->
+                                   <!--autofocus="autofocus"   required=""/>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+                        <!--<label for="placeName"   class="col-sm-2 control-label">地点</label>-->
+                        <!--<div class="col-sm-10 pull-left">-->
+                            <!--<select id="placeName" name="placeName" class="selector">-->
+                                <!--<option value="夔州路">夔州路</option>-->
+                                <!--<option value="利州路">利州路</option>-->
+                                <!--<option value="成都府路">成都府路</option>-->
+                                <!--<option value="潼川府路">潼川府路</option>-->
+                                <!--<option value="京西南路">京西南路</option>-->
+                                <!--<option value="荆湖北路">荆湖北路</option>-->
+                                <!--<option value="荆湖南路">荆湖南路</option>-->
+                                <!--<option value="广南西路">广南西路</option>-->
+                                <!--<option value="广南东路">广南东路</option>-->
+                                <!--<option value="江南西路">江南西路</option>-->
+                                <!--<option value="江南东路">江南东路</option>-->
+                                <!--<option value="淮南西路">淮南西路</option>-->
+                                <!--<option value="淮南东路">淮南东路</option>-->
+                                <!--<option value="两浙西路">两浙西路</option>-->
+                                <!--<option value="两浙东路">两浙东路</option>-->
+                                <!--<option value="福建路">福建路</option>-->
+                            <!--</select>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</form>-->
+            <!--</div>-->
+            <!--<div class="modal-footer">-->
+                <!--<button type="button" class="btn btn-default" data-dismiss="modal">-->
+                    <!--关闭-->
+                <!--</button>-->
+                <!--<div class="form-group">-->
+                <!--<button type="submit" class="btn btn-info" data-dismiss="modal">-->
+                    <!--提交-->
+                <!--</button>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>&lt;!&ndash; /.modal-content &ndash;&gt;-->
+    <!--</div>-->
+
+    <!--</div>-->
+<!--弹出框结束-->
+
+<script>
+    $(document).ready(function() {
+        $('#poemList').DataTable(
+            {
+            language: {
+
+                "sProcessing": "处理中...",
+
+                "sLengthMenu": "显示 _MENU_ 项结果",
+
+                "sZeroRecords": "没有匹配结果",
+
+                "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+
+                "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+
+                "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+
+                "sInfoPostFix": "",
+
+                "sSearch": "搜索:",
+
+                "sUrl": "",
+
+                "sEmptyTable": "表中数据为空",
+
+                "sLoadingRecords": "载入中...",
+
+                "sInfoThousands": ",",
+
+                "oPaginate": {
+
+                    "sFirst": "首页",
+
+                    "sPrevious": "上页",
+
+                    "sNext": "下页",
+
+                    "sLast": "末页"
+
+                },
+
+                "oAria": {
+
+                    "sSortAscending": ": 以升序排列此列",
+
+                    "sSortDescending": ": 以降序排列此列"
+
+                }
+            }
+        }
+        );
+    });
+    
+</script>
+<!--<script>-->
+    <!--$(function () { $('#modifyFormModal').modal('hide')});-->
+<!--</script>-->
+<!--<script>-->
+    <!--//触发模态框的同时调用此方法-->
+    <!--$('a').click(-->
+    <!--function () {-->
+        <!--var id=$(this).attr("id");-->
+        <!--$(function () {-->
+            <!--$('#modifyFormModal').on('show.bs.modal', function ()-->
+            <!--{-->
+                <!--var table=document.getElementById("poemList");-->
+                <!--//获取表格中的一行数据-->
+                <!--var poemId = table.rows[id].cells[0].innerText;-->
+
+                <!--var  title= table.rows[id].cells[1].innerText;-->
+
+                <!--var name = table.rows[id].cells[2].innerText;-->
+
+                <!--var year = table.rows[id].cells[3].innerText;-->
+
+                <!--var place = table.rows[id].cells[4].innerText;-->
+
+                <!--var text= table.rows[id].cells[6].innerText;-->
+
+                <!--//向模态框中传值-->
+
+                <!--$('#poemId').val(poemId);-->
+
+                <!--$('#title').val(title);-->
+
+                <!--$('#year').val(year);-->
+
+                <!--$('#name').val(name);-->
+
+                <!--$('#text').val(text);-->
+
+              <!--// $('#placeName').find("option:").attr("selected",true);-->
+              <!--$('#placeName').val(place);-->
+            <!--})-->
+        <!--});-->
+        <!--$(function toValidate() {-->
+            <!--var table=document.getElementById("poemList");-->
+            <!--//获取表格中的一行数据-->
+
+            <!--var  title= table.rows[id].cells[1].innerText;-->
+
+            <!--var name = table.rows[id].cells[2].innerText;-->
+
+            <!--var year = table.rows[id].cells[3].innerText;-->
+
+            <!--var place = table.rows[id].cells[4].innerText;-->
+
+            <!--var text= table.rows[id].cells[6].innerText;-->
+
+            <!--var ttitle=document.getElementById("title");-->
+            <!--var tname=document.getElementById("name");-->
+            <!--var tyear=document.getElementById("year");-->
+            <!--var tplace=document.getElementById("placeName");-->
+            <!--var ttext=document.getElementById("text");-->
+            <!--if(title==ttitle&&name==tname&&tyear==year&&tplace==place&&ttext==text)-->
+                <!--return false;-->
+            <!--else return true;-->
+        <!--})-->
+    <!--}-->
+    <!--);-->
+<!--</script>-->
+</body>
+</html>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.taihe.databasedemo.dao.StudentMapper">
+  <resultMap id="BaseResultMap" type="com.taihe.databasedemo.entity.Student">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="register_date" jdbcType="DATE" property="registerDate" />
+    <result column="login_id" jdbcType="BIGINT" property="loginId" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="tuition" jdbcType="DOUBLE" property="tuition" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, sex, register_date, login_id, password, tuition
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from student
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from student
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.taihe.databasedemo.entity.Student">
+    insert into student (id, name, sex, 
+      register_date, login_id, password, 
+      tuition)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{registerDate,jdbcType=DATE}, #{loginId,jdbcType=BIGINT}, #{password,jdbcType=VARCHAR}, 
+      #{tuition,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.taihe.databasedemo.entity.Student">
+    insert into student
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="registerDate != null">
+        register_date,
+      </if>
+      <if test="loginId != null">
+        login_id,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="tuition != null">
+        tuition,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="registerDate != null">
+        #{registerDate,jdbcType=DATE},
+      </if>
+      <if test="loginId != null">
+        #{loginId,jdbcType=BIGINT},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="tuition != null">
+        #{tuition,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.taihe.databasedemo.entity.Student">
+    update student
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="registerDate != null">
+        register_date = #{registerDate,jdbcType=DATE},
+      </if>
+      <if test="loginId != null">
+        login_id = #{loginId,jdbcType=BIGINT},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="tuition != null">
+        tuition = #{tuition,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.taihe.databasedemo.entity.Student">
+    update student
+    set name = #{name,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      register_date = #{registerDate,jdbcType=DATE},
+      login_id = #{loginId,jdbcType=BIGINT},
+      password = #{password,jdbcType=VARCHAR},
+      tuition = #{tuition,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="toValidate" parameterType="com.taihe.databasedemo.entity.Student" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from student
+    where login_id = #{loginId}
+    and password=#{password}
+  </select>
+
+</mapper>

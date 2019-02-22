@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>学生登录</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
+    <link rel="stylesheet" th:href="@{css/loginstyle.css}" type="text/css" media="all">
+</head>
+<body>
+<h1>学生登录</h1>
+<div class="container w3layouts agiletis">
+    <div class="login w3layouts agiletis">
+        <h2>登 录</h2>
+        <form th:action="@{/studentloginAction}" method="post" id="loginForm">
+            <input th:value="${failname}" type="text" name="loginId" id="loginId" placeholder="学号" required="">
+            <input type="password" name="password" id="password" placeholder="密码" required="">
+            <p th:text="${notice}" th:if="${not #strings.isEmpty(notice)}" style="color: white"></p>
+            <p th:text="${session.warnings}" th:if="${not #strings.isEmpty(session.warnings)}" style="color: white"></p>
+            <div class="send-button w3layouts agiletis">
+                <input type="submit" name="submit" value="登 录">
+            </div>
+        </form>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+</div>
+<div class="footer w3layouts agiletis">
+    <p>Copyright &copy; 2019 taihe</p>
+</div>
+</body>
+</html>
