@@ -13,16 +13,13 @@ import javax.servlet.http.HttpServletResponse;
 public class LoginInterceptor implements HandlerInterceptor {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    public LoginInterceptor() {
-    }
-
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         Object user = request.getSession().getAttribute("userId");
         if (user != null) {
             return true;
         } else {
             request.getSession().setAttribute("warnings", "访问目标页面之前，请进行身份验证！");
-            this.logger.warn("Unauthorized request for '"+request.getRequestURI()+"' from: " + request.getRemoteHost());
+            this.logger.warn("Unauthorized request for '" + request.getRequestURI() + "' from: " + request.getRemoteHost());
             response.sendRedirect("/studentlogin");
             return false;
         }

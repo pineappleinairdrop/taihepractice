@@ -15,7 +15,13 @@ public class InterceptorConfig extends WebMvcConfigurerAdapter {
 
     public void addInterceptors(InterceptorRegistry registry) {
         super.addInterceptors(registry);
-        registry.addInterceptor(getLoginInterceptor()).excludePathPatterns("/studentloginAction","/studentlogin","/css/*","/js/*","/img/*");
+        registry.addInterceptor(getLoginInterceptor()).excludePathPatterns(
+                        "/studentloginAction",
+                        "/studentlogin",
+                        "/css/*",
+                        "/js/*",
+                        "/img/*"
+                );
 
     }
 }

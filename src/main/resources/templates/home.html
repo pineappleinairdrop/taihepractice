@@ -28,10 +28,12 @@
             <ul class="nav" id="side-menu">
                 <li class="nav-header">
                     <div class="profile-element">
-                        <!--<span><img alt="image" class="img-circle" th:src="@{/assets/img/profile_small.jpg}" /></span>-->
-
-                        <span class="block m-t-xs"><strong class="font-bold">学生个人中心</strong></span>
-                        <span class="block m-t-xs"><b  th:value="${name}"></b></span>
+                        <span class="block m-t-xs"><strong>学生个人中心</strong></span>
+                        <span class="block m-t-xs"><a th:text="'姓名： '+${name}"></a></span>
+                        <span class="block m-t-xs"><a th:text="'学号： '+${loginId}"></a></span>
+                        <span class="block m-t-xs"><a th:text="'性别： '+${sex}"></a></span>
+                        <span class="block m-t-xs"><a th:text="'学费： '+${tuition}+'/学期'"></a></span>
+                        <span class="block m-t-xs"><a th:text="'年级： '+${registerDate}"></a></span>
 
                         <span class="text-muted text-xs block"><a class="btn-info" th:href="@{/logout}">退出</a></span>
                     </div>
@@ -40,15 +42,15 @@
                 <li>
                     <a href="#">
                         <i class="fa fa fa-bar-chart-o"></i>
-                        <span class="nav-label">作品管理</span>
+                        <span class="nav-label">课程管理</span>
                         <span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a class="J_menuItem" th:href="@{/poemList}">作品列表</a>
+                            <a class="J_menuItem" th:href="@{/courseList}">课程列表</a>
                         </li>
                         <li>
-                            <a class="J_menuItem" th:href="@{/poemInfo}">增加作品</a>
+                            <a class="J_menuItem" th:href="@{/selectCourse}">选课</a>
                         </li>
                     </ul>
                 </li>
