@@ -1,82 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.taihe.databasedemo.dao.TakeMapper">
-  <resultMap id="BaseResultMap" type="com.taihe.databasedemo.entity.Take">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="sid" jdbcType="INTEGER" property="sid" />
-    <result column="cid" jdbcType="INTEGER" property="cid" />
-    <result column="score" jdbcType="SMALLINT" property="score" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    id, sid, cid, score
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from take
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from take
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.taihe.databasedemo.entity.Take">
-    insert into take (id, sid, cid, 
-      score)
-    values (#{id,jdbcType=INTEGER}, #{sid,jdbcType=INTEGER}, #{cid,jdbcType=INTEGER}, 
-      #{score,jdbcType=SMALLINT})
-  </insert>
-  <insert id="insertSelective" parameterType="com.taihe.databasedemo.entity.Take">
-    insert into take
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="sid != null">
-        sid,
-      </if>
-      <if test="cid != null">
-        cid,
-      </if>
-      <if test="score != null">
-        score,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="sid != null">
-        #{sid,jdbcType=INTEGER},
-      </if>
-      <if test="cid != null">
-        #{cid,jdbcType=INTEGER},
-      </if>
-      <if test="score != null">
-        #{score,jdbcType=SMALLINT},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.taihe.databasedemo.entity.Take">
-    update take
-    <set>
-      <if test="sid != null">
-        sid = #{sid,jdbcType=INTEGER},
-      </if>
-      <if test="cid != null">
-        cid = #{cid,jdbcType=INTEGER},
-      </if>
-      <if test="score != null">
-        score = #{score,jdbcType=SMALLINT},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.taihe.databasedemo.entity.Take">
-    update take
-    set sid = #{sid,jdbcType=INTEGER},
-      cid = #{cid,jdbcType=INTEGER},
-      score = #{score,jdbcType=SMALLINT}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+    <resultMap id="BaseResultMap" type="com.taihe.databasedemo.entity.Take">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="sid" jdbcType="INTEGER" property="sid"/>
+        <result column="cid" jdbcType="INTEGER" property="cid"/>
+        <result column="score" jdbcType="SMALLINT" property="score"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, sid, cid, score
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from take
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from take
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.taihe.databasedemo.entity.Take">
+        insert into take (id, sid, cid, score)
+        values (#{id,jdbcType=INTEGER}, #{sid,jdbcType=INTEGER}, #{cid,jdbcType=INTEGER}, #{score,jdbcType=SMALLINT})
+    </insert>
+    <insert id="insertSelective" parameterType="com.taihe.databasedemo.entity.Take">
+        insert into take
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="sid != null">
+                sid,
+            </if>
+            <if test="cid != null">
+                cid,
+            </if>
+            <if test="score != null">
+                score,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="sid != null">
+                #{sid,jdbcType=INTEGER},
+            </if>
+            <if test="cid != null">
+                #{cid,jdbcType=INTEGER},
+            </if>
+            <if test="score != null">
+                #{score,jdbcType=SMALLINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.taihe.databasedemo.entity.Take">
+        update take
+        <set>
+            <if test="sid != null">
+                sid = #{sid,jdbcType=INTEGER},
+            </if>
+            <if test="cid != null">
+                cid = #{cid,jdbcType=INTEGER},
+            </if>
+            <if test="score != null">
+                score = #{score,jdbcType=SMALLINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.taihe.databasedemo.entity.Take">
+        update take
+        set sid   = #{sid,jdbcType=INTEGER},
+            cid   = #{cid,jdbcType=INTEGER},
+            score = #{score,jdbcType=SMALLINT}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <delete id="deleteBySidAndCid">
+        delete
+        from take
+        where sid = #{sid,jdbcType=INTEGER}
+          and cid = #{cid,jdbcType=INTEGER}
+    </delete>
 </mapper>

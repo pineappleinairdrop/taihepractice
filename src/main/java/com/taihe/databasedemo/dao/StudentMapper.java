@@ -1,7 +1,6 @@
 package com.taihe.databasedemo.dao;
 
 import com.taihe.databasedemo.entity.Student;
-import org.apache.ibatis.annotations.Param;
 
 public interface StudentMapper {
     int deleteByPrimaryKey(Integer id);

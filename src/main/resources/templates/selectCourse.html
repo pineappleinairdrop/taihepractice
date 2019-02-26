@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<!-- 公共头 -->
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <title>选课列表</title>
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html"/>
+    <![endif]-->
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href="https://cdn.bootcss.com/datatables/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/datatables/1.10.16/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+    <link th:href="@{/css/style.min.css}" rel="stylesheet">
+
+    <script src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/datatables/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.bootcss.com/datatables/1.10.16/js/dataTables.bootstrap.min.js"></script>
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>课程列表</h5>
+                    <div class="ibox-tools">
+                        <button id="selectCourse"  class="btn btn-default"><i class="fa fa-plus-circle"></i>选课</button>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <table class="table  table-bordered table-striped table-hover" id="courseList">
+                        <thead>
+                        <tr>
+                            <th>课程号</th>
+                            <th>课程名</th>
+                            <th>学分</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="course,iterStat:${courseList}">
+                            <td th:text="${course.id}"></td>
+                            <td th:text="${course.name}"></td>
+                            <td th:text="${course.credit}"></td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <th>Number</th>
+                            <th>Title</th>
+                            <th>Credit</th>
+                        </tr>
+                        </tfoot>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        var table = $('#courseList').DataTable({
+                language: {
+
+                    "sProcessing": "处理中...",
+
+                    "sLengthMenu": "显示 _MENU_ 项结果",
+
+                    "sZeroRecords": "没有匹配结果",
+
+                    "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+
+                    "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+
+                    "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+
+                    "sInfoPostFix": "",
+
+                    "sSearch": "搜索:",
+
+                    "sUrl": "",
+
+                    "sEmptyTable": "表中数据为空",
+
+                    "sLoadingRecords": "载入中...",
+
+                    "sInfoThousands": ",",
+
+                    "oPaginate": {
+
+                        "sFirst": "首页",
+
+                        "sPrevious": "上页",
+
+                        "sNext": "下页",
+
+                        "sLast": "末页"
+
+                    },
+
+                    "oAria": {
+
+                        "sSortAscending": ": 以升序排列此列",
+
+                        "sSortDescending": ": 以降序排列此列"
+
+                    }
+                }
+            });
+        $('#courseList tbody').on('click', 'tr', function () {
+            if ($(this).hasClass('selected')) {
+                $(this).removeClass('selected');
+            }
+            else {
+                table.$('tr.selected').removeClass('selected');
+                $(this).addClass('selected');
+            }
+        });
+        $('#selectCourse').click(function () {
+            var data = table.rows(['.selected']).data()[0][0];
+            table.row('.selected').remove().draw(false);
+            $.post("selectCoursePost",{cid:data});
+        });
+    });
+</script>
+</body>
+</html>

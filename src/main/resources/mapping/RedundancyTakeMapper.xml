@@ -1,128 +1,163 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.taihe.databasedemo.dao.RedundancyTakeMapper">
-  <resultMap id="BaseResultMap" type="com.taihe.databasedemo.entity.RedundancyTake">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="sid" jdbcType="INTEGER" property="sid" />
-    <result column="cid" jdbcType="INTEGER" property="cid" />
-    <result column="stu_name" jdbcType="VARCHAR" property="stuName" />
-    <result column="cou_name" jdbcType="VARCHAR" property="couName" />
-    <result column="score" jdbcType="SMALLINT" property="score" />
-    <result column="tid" jdbcType="INTEGER" property="tid" />
-    <result column="tea_name" jdbcType="VARCHAR" property="teaName" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    id, sid, cid, stu_name, cou_name, score, tid, tea_name
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from redundancy_take
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from redundancy_take
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.taihe.databasedemo.entity.RedundancyTake">
-    insert into redundancy_take (id, sid, cid, 
-      stu_name, cou_name, score, 
-      tid, tea_name)
-    values (#{id,jdbcType=INTEGER}, #{sid,jdbcType=INTEGER}, #{cid,jdbcType=INTEGER}, 
-      #{stuName,jdbcType=VARCHAR}, #{couName,jdbcType=VARCHAR}, #{score,jdbcType=SMALLINT}, 
-      #{tid,jdbcType=INTEGER}, #{teaName,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.taihe.databasedemo.entity.RedundancyTake">
-    insert into redundancy_take
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="sid != null">
-        sid,
-      </if>
-      <if test="cid != null">
-        cid,
-      </if>
-      <if test="stuName != null">
-        stu_name,
-      </if>
-      <if test="couName != null">
-        cou_name,
-      </if>
-      <if test="score != null">
-        score,
-      </if>
-      <if test="tid != null">
-        tid,
-      </if>
-      <if test="teaName != null">
-        tea_name,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="sid != null">
-        #{sid,jdbcType=INTEGER},
-      </if>
-      <if test="cid != null">
-        #{cid,jdbcType=INTEGER},
-      </if>
-      <if test="stuName != null">
-        #{stuName,jdbcType=VARCHAR},
-      </if>
-      <if test="couName != null">
-        #{couName,jdbcType=VARCHAR},
-      </if>
-      <if test="score != null">
-        #{score,jdbcType=SMALLINT},
-      </if>
-      <if test="tid != null">
-        #{tid,jdbcType=INTEGER},
-      </if>
-      <if test="teaName != null">
-        #{teaName,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.taihe.databasedemo.entity.RedundancyTake">
-    update redundancy_take
-    <set>
-      <if test="sid != null">
-        sid = #{sid,jdbcType=INTEGER},
-      </if>
-      <if test="cid != null">
-        cid = #{cid,jdbcType=INTEGER},
-      </if>
-      <if test="stuName != null">
-        stu_name = #{stuName,jdbcType=VARCHAR},
-      </if>
-      <if test="couName != null">
-        cou_name = #{couName,jdbcType=VARCHAR},
-      </if>
-      <if test="score != null">
-        score = #{score,jdbcType=SMALLINT},
-      </if>
-      <if test="tid != null">
-        tid = #{tid,jdbcType=INTEGER},
-      </if>
-      <if test="teaName != null">
-        tea_name = #{teaName,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.taihe.databasedemo.entity.RedundancyTake">
-    update redundancy_take
-    set sid = #{sid,jdbcType=INTEGER},
-      cid = #{cid,jdbcType=INTEGER},
-      stu_name = #{stuName,jdbcType=VARCHAR},
-      cou_name = #{couName,jdbcType=VARCHAR},
-      score = #{score,jdbcType=SMALLINT},
-      tid = #{tid,jdbcType=INTEGER},
-      tea_name = #{teaName,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+    <resultMap id="BaseResultMap" type="com.taihe.databasedemo.entity.RedundancyTake">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="sid" jdbcType="INTEGER" property="sid"/>
+        <result column="cid" jdbcType="INTEGER" property="cid"/>
+        <result column="stu_name" jdbcType="VARCHAR" property="stuName"/>
+        <result column="cou_name" jdbcType="VARCHAR" property="couName"/>
+        <result column="score" jdbcType="SMALLINT" property="score"/>
+        <result column="tid" jdbcType="INTEGER" property="tid"/>
+        <result column="tea_name" jdbcType="VARCHAR" property="teaName"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, sid, cid, stu_name, cou_name, score, tid, tea_name
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from redundancy_take
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from redundancy_take
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.taihe.databasedemo.entity.RedundancyTake">
+        insert into redundancy_take (id, sid, cid, stu_name, cou_name, score, tid, tea_name)
+        values (#{id,jdbcType=INTEGER},
+                #{sid,jdbcType=INTEGER},
+                #{cid,jdbcType=INTEGER},
+                #{stuName,jdbcType=VARCHAR},
+                #{couName,jdbcType=VARCHAR},
+                #{score,jdbcType=SMALLINT},
+                #{tid,jdbcType=INTEGER},
+                #{teaName,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.taihe.databasedemo.entity.RedundancyTake">
+        insert into redundancy_take
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="sid != null">
+                sid,
+            </if>
+            <if test="cid != null">
+                cid,
+            </if>
+            <if test="stuName != null">
+                stu_name,
+            </if>
+            <if test="couName != null">
+                cou_name,
+            </if>
+            <if test="score != null">
+                score,
+            </if>
+            <if test="tid != null">
+                tid,
+            </if>
+            <if test="teaName != null">
+                tea_name,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="sid != null">
+                #{sid,jdbcType=INTEGER},
+            </if>
+            <if test="cid != null">
+                #{cid,jdbcType=INTEGER},
+            </if>
+            <if test="stuName != null">
+                #{stuName,jdbcType=VARCHAR},
+            </if>
+            <if test="couName != null">
+                #{couName,jdbcType=VARCHAR},
+            </if>
+            <if test="score != null">
+                #{score,jdbcType=SMALLINT},
+            </if>
+            <if test="tid != null">
+                #{tid,jdbcType=INTEGER},
+            </if>
+            <if test="teaName != null">
+                #{teaName,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.taihe.databasedemo.entity.RedundancyTake">
+        update redundancy_take
+        <set>
+            <if test="sid != null">
+                sid = #{sid,jdbcType=INTEGER},
+            </if>
+            <if test="cid != null">
+                cid = #{cid,jdbcType=INTEGER},
+            </if>
+            <if test="stuName != null">
+                stu_name = #{stuName,jdbcType=VARCHAR},
+            </if>
+            <if test="couName != null">
+                cou_name = #{couName,jdbcType=VARCHAR},
+            </if>
+            <if test="score != null">
+                score = #{score,jdbcType=SMALLINT},
+            </if>
+            <if test="tid != null">
+                tid = #{tid,jdbcType=INTEGER},
+            </if>
+            <if test="teaName != null">
+                tea_name = #{teaName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.taihe.databasedemo.entity.RedundancyTake">
+        update redundancy_take
+        set sid      = #{sid,jdbcType=INTEGER},
+            cid      = #{cid,jdbcType=INTEGER},
+            stu_name = #{stuName,jdbcType=VARCHAR},
+            cou_name = #{couName,jdbcType=VARCHAR},
+            score    = #{score,jdbcType=SMALLINT},
+            tid      = #{tid,jdbcType=INTEGER},
+            tea_name = #{teaName,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <select id="selectCourseListBySid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from redundancy_take
+        where sid=#{sid,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteBySidAndCid">
+        delete
+        from redundancy_take
+        where sid = #{sid,jdbcType=INTEGER}
+          and cid = #{cid,jdbcType=INTEGER}
+    </delete>
+    <insert id="insertBySidAndCid" >
+        insert into redundancy_take (id, sid, cid, score, stu_name, cou_name, tid, tea_name)
+        select id,
+               sid,
+               cid,
+               score,
+               stu_name,
+               cou_name,
+               teachid,
+               tea_name
+        from (select *
+              from take
+                       left join (select id as takeid, name as stu_name from student) s on take.sid = s.takeid
+                       left join (select id as courseid, name as cou_name from course) c on take.cid = c.courseid
+                       left join (select id as teachid from teach)tea on tea.teachid = c.courseid
+                       left join (select id as nulid, name as tea_name from teacher) t on tea.teachid = t.nulid where cid=#{cid} and sid=#{sid})a ;
+    </insert>
+
+
 </mapper>

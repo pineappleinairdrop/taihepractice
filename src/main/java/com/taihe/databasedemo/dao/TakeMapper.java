@@ -1,9 +1,12 @@
 package com.taihe.databasedemo.dao;
 
 import com.taihe.databasedemo.entity.Take;
+import org.apache.ibatis.annotations.Param;
 
 public interface TakeMapper {
     int deleteByPrimaryKey(Integer id);
+
+    int deleteBySidAndCid(@Param("sid") Integer sid, @Param("cid") Integer cid);
 
     int insert(Take record);
 

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--从此处开始至结束标志为H+页面公共头 具体功能模块需另行引用-->
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
@@ -29,16 +29,14 @@
                 <li class="nav-header">
                     <div class="profile-element">
                         <span class="block m-t-xs"><strong>学生个人中心</strong></span>
-                        <span class="block m-t-xs"><a th:text="'姓名： '+${name}"></a></span>
+                        <span class="block m-t-xs"><a disabled="" th:text="'姓名： '+${name}"></a></span>
                         <span class="block m-t-xs"><a th:text="'学号： '+${loginId}"></a></span>
                         <span class="block m-t-xs"><a th:text="'性别： '+${sex}"></a></span>
                         <span class="block m-t-xs"><a th:text="'学费： '+${tuition}+'/学期'"></a></span>
                         <span class="block m-t-xs"><a th:text="'年级： '+${registerDate}"></a></span>
-
                         <span class="text-muted text-xs block"><a class="btn-info" th:href="@{/logout}">退出</a></span>
                     </div>
                 </li>
-
                 <li>
                     <a href="#">
                         <i class="fa fa fa-bar-chart-o"></i>
@@ -96,8 +94,7 @@
             <button class="roll-nav roll-right J_tabRight"><i class="fa fa-forward"></i>
             </button>
             <div class="btn-group roll-nav roll-right">
-                <button class="dropdown J_tabClose" data-toggle="dropdown">关闭操作<span class="caret"></span>
-
+                <button class="dropdown J_tabClose" data-toggle="dropdown">操作选项<span class="caret"></span>
                 </button>
                 <ul role="menu" class="dropdown-menu dropdown-menu-right">
                     <li class="J_tabShowActive">
@@ -112,7 +109,7 @@
                     </li>
                 </ul>
             </div>
-            <a th:href="@{/logout}" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
+            <a th:href="@{/logout}" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i>退出</a>
         </div>
         <div class="row J_mainContent" id="content-main">
             <iframe class="J_iframe" name="iframe0" width="100%" height="100%" th:src="@{/v1056.html}" frameborder="0"
@@ -127,16 +124,11 @@
     <!--右侧边栏开始-->
     <div id="right-sidebar">
         <div class="sidebar-container">
-
             <ul class="nav nav-tabs navs-3">
-
                 <li class="active">
-                    <a data-toggle="tab" href="#tab-1">
-                        <i class="fa fa-gear"></i> 主题
-                    </a>
+                    <a data-toggle="tab" href="#tab-1"><i class="fa fa-gear"></i>主题</a>
                 </li>
             </ul>
-
             <div class="tab-content">
                 <div id="tab-1" class="tab-pane active">
                     <div class="sidebar-title">
@@ -145,12 +137,11 @@
                     </div>
                     <div class="skin-setttings">
                         <div class="title">主题设置</div>
-                        <div class="setings-item">
+                        <div class="settings-item">
                             <span>收起左侧菜单</span>
                             <div class="switch">
                                 <div class="onoffswitch">
-                                    <input type="checkbox" name="collapsemenu" class="onoffswitch-checkbox"
-                                           id="collapsemenu">
+                                    <input type="checkbox" name="collapsemenu" class="onoffswitch-checkbox" id="collapsemenu">
                                     <label class="onoffswitch-label" for="collapsemenu">
                                         <span class="onoffswitch-inner"></span>
                                         <span class="onoffswitch-switch"></span>
@@ -158,9 +149,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="setings-item">
+                        <div class="settings-item">
                             <span>固定顶部</span>
-
                             <div class="switch">
                                 <div class="onoffswitch">
                                     <input type="checkbox" name="fixednavbar" class="onoffswitch-checkbox"
@@ -172,11 +162,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="setings-item">
-									<span>
-                        固定宽度
-                    </span>
-
+                        <div class="settings-item">
+									<span>固定宽度</span>
                             <div class="switch">
                                 <div class="onoffswitch">
                                     <input type="checkbox" name="boxedlayout" class="onoffswitch-checkbox"
@@ -189,33 +176,19 @@
                             </div>
                         </div>
                         <div class="title">皮肤选择</div>
-                        <div class="setings-item default-skin nb">
-									<span class="skin-name ">
-                         <a href="#" class="s-skin-0">
-                             默认皮肤
-                         </a>
-                    </span>
+                        <div class="settings-item default-skin nb">
+                            <span class="skin-name "><a href="#" class="s-skin-0">默认皮肤</a></span>
                         </div>
-                        <div class="setings-item blue-skin nb">
-									<span class="skin-name ">
-                        <a href="#" class="s-skin-1">
-                            蓝色主题
-                        </a>
-                    </span>
+                        <div class="settings-item blue-skin nb">
+                            <span class="skin-name "><a href="#" class="s-skin-1">蓝色主题</a></span>
                         </div>
-                        <div class="setings-item yellow-skin nb">
-									<span class="skin-name ">
-                        <a href="#" class="s-skin-3">
-                            黄色/紫色主题
-                        </a>
-                    </span>
+                        <div class="settings-item yellow-skin nb">
+                            <span class="skin-name "><a href="#" class="s-skin-3">黄色/紫色主题</a></span>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
-
     </div>
 </div>
 <!--右侧边栏结束-->
@@ -228,5 +201,4 @@
 <script th:src="@{/js/hplus.min.js}"></script>
 <script type="text/javascript" th:src="@{/js/contabs.min.js}"></script>
 </body>
-
 </html>

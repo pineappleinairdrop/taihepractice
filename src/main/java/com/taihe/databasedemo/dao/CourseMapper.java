@@ -2,8 +2,12 @@ package com.taihe.databasedemo.dao;
 
 import com.taihe.databasedemo.entity.Course;
 
+import java.util.List;
+
 public interface CourseMapper {
     int deleteByPrimaryKey(Integer id);
+
+    List<Course> selectExceptTaken(Integer sid);
 
     int insert(Course record);
 

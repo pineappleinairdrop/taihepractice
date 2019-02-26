@@ -5,6 +5,16 @@ public class Course {
 
     private String name;
 
+    private byte credit;
+
+    public byte getCredit() {
+        return credit;
+    }
+
+    public void setCredit(byte credit) {
+        this.credit = credit;
+    }
+
     public Integer getId() {
         return id;
     }
