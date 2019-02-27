@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<!-- 公共头 -->
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <title>课程列表</title>
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html"/>
+    <![endif]-->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/datatables/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+    <link th:href="@{/css/style.min.css}" rel="stylesheet">
+
+    <script src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/datatables/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.bootcss.com/datatables/1.10.19/js/dataTables.bootstrap.min.js"></script>
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>课程列表
+                    </h5>
+                    <div class="ibox-tools">
+                        <a th:href="@{/courseList4Admin}">
+                            <i class="fa fa-refresh"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <table class="table  table-bordered table-striped table-hover" id="courseList4Admin">
+                        <thead>
+                        <tr>
+                            <th>课程号</th>
+                            <th>课程名</th>
+                            <th>学分</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="course,iterStat:${courseList}" th:id="'row'+${course.id}">
+                            <td th:text="${course.id}">1</td>
+                            <td th:text="${course.name}" th:id="'name'+${course.id}" >12</td>
+                            <td th:text="${course.credit}" th:id="'credit'+${course.id}">1</td>
+                            <td>
+                                <button class="btn-info" th:id="${course.id}" data-toggle="modal"
+                                        data-target="#modifyCourseModal">修改
+                                </button>
+                                &#12288&#12288
+                                <a class="btn-danger" th:id="'del'+${course.id}" th:href="@{'/deleteCourse/'+${course.id}}" target="sub_frame" >删除</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <th>Number</th>
+                            <th>Title</th>
+                            <th>Credit</th>
+                            <th>Action</th>
+                        </tr>
+                        </tfoot>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<iframe id="sub_frame" name="sub_frame" height="0" width="0" frameborder="0" marginheight="0" marginwidth="0" ></iframe>
+<div class="modal fade" id="modifyCourseModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    修改课程
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" method="post" role="form" action="/doModifyCourse" target="sub_frame">
+                    <h3 class="text-center">修改记录</h3>
+                    <div class="form-group hide">
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="id" name="id"
+                                   autofocus="autofocus" required=""/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">课程名</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="name" name="name"
+                                   autofocus="autofocus" placeholder="请输入课程名" required=""/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="credit" class="col-sm-2 control-label">学分</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="credit" name="credit"
+                                   autofocus="autofocus" placeholder="请输入学分" required=""/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button id="modalSubmit" type="submit" class="btn btn-info">提交</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div><!-- /.modal -->
+
+</body>
+<script>
+
+</script>
+<script>
+    $(document).ready(function () {
+        var table = $('#courseList4Admin').DataTable(
+            {
+                language: {
+
+                    "sProcessing": "处理中...",
+                    "sLengthMenu": "显示 _MENU_ 项结果",
+                    "sZeroRecords": "没有匹配结果",
+                    "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+                    "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+                    "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+                    "sInfoPostFix": "",
+                    "sSearch": "搜索:",
+                    "sUrl": "",
+                    "sEmptyTable": "表中数据为空",
+                    "sLoadingRecords": "载入中...",
+                    "sInfoThousands": ",",
+                    "oPaginate": {
+                        "sFirst": "首页",
+                        "sPrevious": "上页",
+                        "sNext": "下页",
+                        "sLast": "末页"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": 以升序排列此列",
+                        "sSortDescending": ": 以降序排列此列"
+                    }
+                }
+            }
+        );
+
+        $("#modifyCourseModal").on('show.bs.modal', function () {
+            var data = table.rows(['.selected']).data()[0];
+            var id = data[0];
+            var oldname = $('#name' + id).text();
+            var oldcredit = $('#credit' + id).text();
+            $('#id').val(id);
+            $('#name').val(oldname);
+            $('#credit').val(oldcredit);
+        });
+
+
+        $("#modifyCourseModal").on('hide.bs.modal', function () {
+            var id = $("input[id='id']")[0].value;
+            var newname = $("input[id='name']")[0].value;
+            var newcredit = $("input[id='credit']")[0].value;
+            $('#name' + id).text(newname);
+            $('#credit' + id).text(newcredit);
+        });
+
+        $("#modalSubmit").click(function(){
+            $("#modifyCourseModal").modal('hide');
+
+        });
+
+        $('#courseList4Admin tbody').on('click', 'tr', function () {
+            if ($(this).hasClass('selected')) {
+                $(this).removeClass('selected');
+            }
+            else {
+                table.$('tr.selected').removeClass('selected');
+                $(this).addClass('selected');
+            }
+        });
+
+        var rid=table.rows(['.selected']).data()[0][0];
+        $('#del'+rid).click(function () {
+            $('#row'+rid).addClass('hide');
+            $(this).superclass.addClass('hide');
+        });
+
+    });
+
+</script>
+</html>

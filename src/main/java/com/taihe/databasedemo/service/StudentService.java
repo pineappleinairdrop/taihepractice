@@ -30,17 +30,25 @@ public class StudentService {
         return redundancyTakeMapper.selectCourseListBySid(sid);
     }
 
+    public List<Student> getStudentList() {
+
+        return studentMapper.selectByPage();//todo: pageHelper
+    }
+
+
     @Transactional
     public void deleteTake(Integer sid, Integer cid) {
         redundancyTakeMapper.deleteBySidAndCid(sid, cid);
         takeMapper.deleteBySidAndCid(sid, cid);
     }
+
     @Transactional
-    public void addTake(Integer sid,Integer cid){
-        Take take=new Take();
+    public void addTake(Integer sid, Integer cid) {
+        Take take = new Take();
         take.setSid(sid);
         take.setCid(cid);
         takeMapper.insertSelective(take);
-        redundancyTakeMapper.insertBySidAndCid(sid,cid);
+        redundancyTakeMapper.insertBySidAndCid(sid, cid);
     }
+
 }

@@ -20,7 +20,7 @@ public class CourseController {
 
     @GetMapping("/selectCourse")
     public String courseList(Model model, HttpSession session) {
-        model.addAttribute("courseList", courseService.courseList((Integer) session.getAttribute("userId")));
+        model.addAttribute("courseList", courseService.courseList4Student((Integer) session.getAttribute("userId")));
         return "selectCourse";
     }
 

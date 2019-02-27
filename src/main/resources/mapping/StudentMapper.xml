@@ -121,5 +121,10 @@
     where login_id = #{loginId}
     and password=#{password}
   </select>
+  <select id="selectByPage"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from student
+  </select>
 
 </mapper>

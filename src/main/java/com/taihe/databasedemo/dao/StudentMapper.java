@@ -2,6 +2,8 @@ package com.taihe.databasedemo.dao;
 
 import com.taihe.databasedemo.entity.Student;
 
+import java.util.List;
+
 public interface StudentMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -16,4 +18,6 @@ public interface StudentMapper {
     int updateByPrimaryKey(Student record);
 
     Student toValidate(Student record);
+
+    List<Student> selectByPage();
 }

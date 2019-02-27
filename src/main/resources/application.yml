@@ -25,3 +25,5 @@ mybatis:
   configuration:
     use-column-label: true
     map-underscore-to-camel-case: true
+pagehelper:
+  reasonable: true
