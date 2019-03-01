@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
     <meta name="renderer" content="webkit">
-    <title>学生列表</title>
+    <title>教师列表</title>
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html"/>
     <![endif]-->
@@ -27,25 +27,22 @@
         <div class="col-sm-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>学生列表
+                    <h5>教师列表
                     </h5>
                     <div class="ibox-tools">
-                        <a th:href="@{/studentList}">
+                        <a th:href="@{/teacherList}">
                             <i class="fa fa-refresh"></i>
                         </a>
                     </div>
                 </div>
                 <div class="ibox-content">
 
-                    <table class="table table-striped table-bordered table-hover" id="studentList">
+                    <table class="table table-striped table-bordered table-hover" id="teacherList">
                         <thead>
                         <tr>
                             <th></th>
-                            <th>学号</th>
+                            <th>工号</th>
                             <th>姓名</th>
-                            <th>性别</th>
-                            <th>学费</th>
-                            <th>年级</th>
                         </tr>
                         </thead>
                         <tbody></tbody>
@@ -54,9 +51,6 @@
                             <th></th>
                             <th>Id</th>
                             <th>Name</th>
-                            <th>Gender</th>
-                            <th>Tuition</th>
-                            <th>Grade</th>
                         </tr>
                         </tfoot>
                     </table>
@@ -69,7 +63,7 @@
 
 <script>
     $(document).ready(function () {
-        $('#studentList').DataTable({
+        $('#teacherList').DataTable({
             processing: true,
             serverSide: true,
             lengthChange: false,//是否允许用户改变表格每页显示的记录数
@@ -96,21 +90,13 @@
                 }
             },
             ajax: {
-                url: '/refreshStudentList',
+                url: '/refreshTeacherList',
                 type: 'POST'
             },
             columns: [
                 {data: "id"}, // <th></th>
-                {data: "loginId"},// <th>学号</th>
-                {data: "name"},// <th>姓名</th>
-                {data: "sex"},// <th>性别</th>
-                {data: "tuition"},// <th>学费</th>
-                {
-                    data: "registerDate",render: function (data) {
-                        // Sep 1, 2016
-                        return data.substring(8,11);
-                    }
-                } // <th>年级</th>
+                {data: "loginId"},// <th>工号</th>
+                {data: "name"}// <th>姓名</th>
             ]
         });
 

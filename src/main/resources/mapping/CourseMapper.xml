@@ -83,11 +83,30 @@
         select tak.cid from take tak where sid=#{sid,jdbcType=INTEGER}
         )
     </select>
+    <select id="selectExceptTeach" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from course c
+        where c.id not in
+        (
+        select teac.cid from teach teac where tid=#{tid,jdbcType=INTEGER}
+        )
+    </select>
 
     <select id="selectAll" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from course c
     </select>
+    <select id="getCourseListByTid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from course c
+        where c.id in
+        (
+        select teac.cid from teach teac where tid=#{tid,jdbcType=INTEGER}
+        )
+    </select>
+
 
 </mapper>

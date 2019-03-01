@@ -30,7 +30,7 @@
                     <h5>课程列表
                     </h5>
                     <div class="ibox-tools">
-                        <a th:href="@{/courseList}">
+                        <a th:href="@{/courseList4Teacher}">
                             <i class="fa fa-refresh"></i>
                         </a>
                     </div>
@@ -42,30 +42,28 @@
                         <tr>
                             <th>课程号</th>
                             <th>课程名</th>
-                            <th>任课老师</th>
-                            <th>分数</th>
+                            <th>学分</th>
                             <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="taken,iterStat:${courseList}">
-                            <td th:text="${taken.cid}"></td>
-                            <td th:text="${taken.couName}"></td>
-                            <td th:text="${taken.teaName}"></td>
-                            <td th:text="${taken.score}"></td>
+                        <tr th:each="teach,iterStat:${courseList}">
+                            <td th:text="${teach.id}"></td>
+                            <td th:text="${teach.name}"></td>
+                            <td th:text="${teach.credit}"></td>
+
                             <td>
                                 <!--&#12288&#12288&#12288-->
                                 <a class="btn btn-danger btn-sm"
-                                   th:href="@{'/deleteTaken/'+${taken.cid}}"
-                                   onclick="return confirmDrop()">退课</a>
+                                   th:href="@{'/deleteTeach/'+${teach.id}}"
+                                   onclick="return confirmDrop()">取消教授</a>
                             </td>
                         </tr>
                         <tfoot>
                         <tr>
                             <th>Number</th>
                             <th>Title</th>
-                            <th>Teacher</th>
-                            <th>Score</th>
+                            <th>Credit</th>
                             <th>Action</th>
                         </tr>
                         </tfoot>
@@ -78,7 +76,7 @@
 </div>
 <script>
     function confirmDrop() {
-        var result = confirm("你确认要退课吗？");
+        var result = confirm("您确认要取消教授本门课程吗？");
         return result == true;
     }
 </script>

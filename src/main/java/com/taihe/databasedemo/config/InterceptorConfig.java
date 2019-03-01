@@ -18,10 +18,13 @@ public class InterceptorConfig extends WebMvcConfigurerAdapter {
         registry.addInterceptor(getLoginInterceptor()).excludePathPatterns(
                 "/studentloginAction",
                 "/studentlogin",
+                "/adminlogin",
+                "/adminloginAction",
+                "/teacherlogin",
+                "teacherloginAction",
                 "/css/*",
                 "/js/*",
-                "/img/*",
-                "/admin"
+                "/img/*"
         );
 
     }

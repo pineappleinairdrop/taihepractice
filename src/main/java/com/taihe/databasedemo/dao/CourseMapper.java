@@ -9,6 +9,10 @@ public interface CourseMapper {
 
     List<Course> selectExceptTaken(Integer sid);
 
+    List<Course> selectExceptTeach(Integer tid);
+
+    List<Course> getCourseListByTid(Integer tid);
+
     List<Course> selectAll();
 
     int insert(Course record);

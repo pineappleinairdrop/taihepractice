@@ -125,6 +125,24 @@
     select
     <include refid="Base_Column_List"/>
     from student
+    where id between #{start} and #{end}
+  </select>
+  <select id="maxId" resultType="java.lang.Integer">
+    select
+    max(id)
+    from student
   </select>
 
+  <select id="selectByLoginId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from student
+    where login_id=#{loginId}
+  </select>
+  <update id="updatePasswordByLoginId" parameterType="com.taihe.databasedemo.entity.Student">
+    update student
+    set
+    password = #{password,jdbcType=VARCHAR}
+    where login_id = #{loginId,jdbcType=INTEGER}
+  </update>
 </mapper>

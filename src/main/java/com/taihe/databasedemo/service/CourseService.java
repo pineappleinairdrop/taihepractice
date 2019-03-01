@@ -20,11 +20,15 @@ public class CourseService {
         return courseMapper.selectAll();
     }
 
-    public void modifyCourse(Course course){
+    public void modifyCourse(Course course) {
         courseMapper.updateByPrimaryKeySelective(course);
     }
 
-    public void deleteCourseById(Integer id){
+    public void deleteCourseById(Integer id) {
         courseMapper.deleteByPrimaryKey(id);
+    }
+
+    public void addCourse(Course course) {
+        courseMapper.insertSelective(course);
     }
 }

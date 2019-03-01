@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<!-- 公共头 -->
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <!--<meta http-equiv="Cache-Control"content="no-siteapp"/>-->
+    <title>新增课程</title>
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html"/>
+    <![endif]-->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+    <link th:href="@{/css/style.min.css}" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<!--至此处结束-->
+
+<body class="gray-bg">
+<div class="middle-box text-center animated fadeInDown">
+
+    <form class="form-horizontal" method="post" name="newCourse" role="form" onsubmit=" return afterVaild()" th:action="@{/addCourse}">
+        <h3 class="text-center">新增记录</h3>
+        <div class="form-group">
+            <label for="name" class="col-sm-2 control-label">课程名</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="name" name="name"
+                       autofocus="autofocus" placeholder="请输入课程名" required=""/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="credit" class="col-sm-2 control-label">学分</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="credit" name="credit"
+                       autofocus="autofocus" placeholder="请输入学分" required=""/>
+            </div>
+        </div>
+
+        <div id="alert" class="hide col-sm-offset-5 col-sm-4" style=" color: #31708f; background-color: #d9edf7; border-color: #bce8f1;">
+            <br/>
+            成功添加课程
+            <br/>
+            &nbsp;
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-info pull-right">提交</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+<script>
+    function sleep() {
+    }
+    function afterVaild() {
+        var credit = newCourse.credit.value;
+        if ((!isNaN(credit)) && 0 <= credit && 10 >= credit) {
+            $("#alert").removeClass('hide');
+            setTimeout(sleep(),1000);
+            return true;
+        }
+        else {
+            alert("请输入合法的学分");
+            return false;
+        }
+    }
+</script>
+</html>

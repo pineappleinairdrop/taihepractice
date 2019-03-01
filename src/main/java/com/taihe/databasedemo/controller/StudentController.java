@@ -34,9 +34,9 @@ public class StudentController {
             e.printStackTrace();
         }
         Student validate = studentService.toValidate(student);
+        httpSession.removeAttribute("warnings");
         if (validate != null) {
-            httpSession.setAttribute("userId", validate.getId());
-            httpSession.removeAttribute("warnings");
+            httpSession.setAttribute("stuId", validate.getId());
             map.put("name", validate.getName());
             map.put("loginId", validate.getLoginId().toString());
             map.put("sex", validate.getSex());
@@ -44,7 +44,6 @@ public class StudentController {
             map.put("tuition", String.valueOf(validate.getTuition()));
             return "home";
         } else {
-            httpSession.removeAttribute("warnings");
             map.put("notice", "请输入正确的账号与密码！");
             map.put("failname", String.valueOf(student.getLoginId()));
             return "studentlogin";
@@ -53,16 +52,45 @@ public class StudentController {
 
     @GetMapping("/courseList")
     public String courseList(HttpSession httpSession, Model model) {
-        Integer sid = (Integer) httpSession.getAttribute("userId");
+        Integer sid = (Integer) httpSession.getAttribute("stuId");
         model.addAttribute("courseList", studentService.getCourseList(sid));
         return "courseList";
     }
 
     @GetMapping("/deleteTaken/{cid}")
     public String deleteTaken(@PathVariable("cid") Integer cid, HttpSession session) {
-        studentService.deleteTake((Integer) session.getAttribute("userId"), cid);
+        studentService.deleteTake((Integer) session.getAttribute("stuId"), cid);
         return "redirect:/courseList";
 
+    }
+
+    @PostMapping("/doModifyPassword")
+    public String doModifyPassword(Long loginId, String oldpwd, String password, HttpSession httpSession, Map<String, String> map) throws NoSuchAlgorithmException {
+        Student student = studentService.getStudentByLoginId(loginId);
+        if (studentService.canModifyPassword(loginId, oldpwd, password)) {
+            httpSession.setAttribute("modified", "succeeded");
+            map.put("name", student.getName());
+            map.put("loginId", student.getLoginId().toString());
+            map.put("sex", student.getSex());
+            map.put("registerDate", String.valueOf(student.getRegisterDate().getYear() + 1900));
+            map.put("tuition", String.valueOf(student.getTuition()));
+
+        } else {
+            httpSession.setAttribute("modified", "failed");
+            map.put("name", student.getName());
+            map.put("loginId", student.getLoginId().toString());
+            map.put("sex", student.getSex());
+            map.put("registerDate", String.valueOf(student.getRegisterDate().getYear() + 1900));
+            map.put("tuition", String.valueOf(student.getTuition()));
+
+        }
+        return "home";
+    }
+    @GetMapping("/stulogout")
+    public String logout(HttpSession httpSession){
+        httpSession.removeAttribute("stuId");
+        httpSession.removeAttribute("warnings");
+        return "studentlogin";
     }
 
 }

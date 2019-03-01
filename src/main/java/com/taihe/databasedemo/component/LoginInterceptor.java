@@ -14,7 +14,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        Object user = request.getSession().getAttribute("userId");
+        Object user = request.getSession().getAttribute("stuId");
         if (user != null) {
             return true;
         } else {

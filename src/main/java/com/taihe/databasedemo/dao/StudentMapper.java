@@ -1,6 +1,7 @@
 package com.taihe.databasedemo.dao;
 
 import com.taihe.databasedemo.entity.Student;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -19,5 +20,11 @@ public interface StudentMapper {
 
     Student toValidate(Student record);
 
-    List<Student> selectByPage();
+    List<Student> selectByPage(@Param("start") int start,@Param("end")int end);
+
+    void updatePasswordByLoginId(Student record);
+
+    int maxId();
+
+    Student selectByLoginId(@Param("loginId") Long loginId);
 }

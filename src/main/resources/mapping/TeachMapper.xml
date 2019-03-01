@@ -66,4 +66,10 @@
       cid = #{cid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <delete id="deleteByTidAndCid">
+    delete
+    from teach
+    where tid = #{tid,jdbcType=INTEGER}
+      and cid = #{cid,jdbcType=INTEGER}
+  </delete>
 </mapper>

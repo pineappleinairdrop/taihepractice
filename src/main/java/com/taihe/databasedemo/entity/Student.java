@@ -1,8 +1,24 @@
 package com.taihe.databasedemo.entity;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Student {
+    public Student(){
+
+    }
+    public Student(String name,String sex,String registerDate,Double tuition){
+        this.name=name;
+        this.sex=sex;
+        this.tuition=tuition;
+        //2019-12-23
+        //0   45 78 10
+        this.registerDate=new Date(
+                Integer.valueOf(registerDate.substring(0,4))-1900,
+                Integer.valueOf(registerDate.substring(5,7))-1,
+                Integer.valueOf(registerDate.substring(8, 10))
+        );
+
+    }
     private Integer id;
 
     private String name;
