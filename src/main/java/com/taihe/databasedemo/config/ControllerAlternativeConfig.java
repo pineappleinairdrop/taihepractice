@@ -13,7 +13,8 @@ public class ControllerAlternativeConfig implements WebMvcConfigurer {
         registry.addViewController("/studentlogin.html").setViewName("studentlogin");
 
         registry.addViewController("/home").setViewName("home");
-        registry.addViewController("/home.html").setViewName("home");
+        registry.addViewController("/teacher").setViewName("teacher");
+        registry.addViewController("/admin").setViewName("admin");
 
         registry.addViewController("/studentList").setViewName("studentList");
         registry.addViewController("/teacherList").setViewName("teacherList");

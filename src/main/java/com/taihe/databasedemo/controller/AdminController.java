@@ -31,11 +31,6 @@ public class AdminController {
     @Autowired
     TeacherService teacherService;
 
-    @GetMapping("/admin")
-    public String adminHome() {
-        return "admin";
-    }
-
 
     @GetMapping("/courseList4Admin")
     public String courseList4Admin(Model model) {
@@ -121,6 +116,11 @@ public class AdminController {
             model.addAttribute("notice", "请输入正确的密码！");
             return "adminlogin";
         }
+    }
+    @GetMapping("/adminlogout")
+    public String adminLogout(HttpSession httpSession){
+        httpSession.removeAttribute("admin");
+        return "adminlogin";
     }
     @PostMapping("/addTeacher")
     public String addTeacher(String name) {

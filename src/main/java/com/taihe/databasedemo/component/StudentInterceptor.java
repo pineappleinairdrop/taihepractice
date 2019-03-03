@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Component
-public class LoginInterceptor implements HandlerInterceptor {
+public class StudentInterceptor implements HandlerInterceptor {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -19,7 +19,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             return true;
         } else {
             request.getSession().setAttribute("warnings", "访问目标页面之前，请进行身份验证！");
-            this.logger.warn("Unauthorized request for '" + request.getRequestURI() + "' from: " + request.getRemoteHost());
+            logger.warn("Unauthorized request for '" + request.getRequestURI() + "' from: " + request.getRemoteHost());
             response.sendRedirect("/studentlogin");
             return false;
         }
