@@ -34,6 +34,7 @@ public class TeacherService {
         return teacherMapper.selectByPage(start + 1, end);
     }
 
+
     public void addTeacher(String name) {
         Teacher teacher = new Teacher();
         teacher.setName(name);
@@ -53,6 +54,9 @@ public class TeacherService {
 
     public List<Course> getCourseListByTid(Integer tid) {
         return courseMapper.getCourseListByTid(tid);
+    }
+    public List<Course>   selectExceptTeach(Integer tid) {
+        return courseMapper.selectExceptTeach(tid);
     }
 
     public void deleteTeach(Integer tid, Integer cid) {

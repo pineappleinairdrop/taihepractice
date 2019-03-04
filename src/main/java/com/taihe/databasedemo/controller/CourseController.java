@@ -23,13 +23,13 @@ public class CourseController {
 
     @GetMapping("/selectCourse")
     public String courseList(Model model, HttpSession session) {
-        model.addAttribute("courseList", courseService.courseList4Student((Integer) session.getAttribute("userId")));
+        model.addAttribute("courseList", courseService.courseList4Student((Integer) session.getAttribute("stuId")));
         return "selectCourse";
     }
 
     @GetMapping("/selectCourse4Teacher")
     public String courseList4Teacher(Model model, HttpSession session) {
-        model.addAttribute("courseList", courseService.courseList4Student((Integer) session.getAttribute("userId")));
+        model.addAttribute("courseList", teacherService.selectExceptTeach((Integer) session.getAttribute("teaId")));
         return "selectCourse4Teacher";
     }
 
