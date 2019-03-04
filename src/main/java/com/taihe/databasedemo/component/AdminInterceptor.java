@@ -16,16 +16,16 @@ public class AdminInterceptor implements HandlerInterceptor {
         if (admin != null&&admin.equals(Boolean.TRUE)) {
             return true;
         } else {
-            request.getSession().setAttribute("warnings", "访问目标页面之前，请进行身份验证！");
+            request.getSession().setAttribute("warnings", "您目前并非管理员，请进行身份验证！");
             logger.warn("Unauthorized request for '" + request.getRequestURI() + "' from: " + request.getRemoteHost());
             response.sendRedirect("/adminlogin");
             return false;
         }
     }
 
-    public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
+    public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) {
     }
 
-    public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {
+    public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) {
     }
 }

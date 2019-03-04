@@ -4,8 +4,6 @@ import com.taihe.databasedemo.entity.Student;
 import com.taihe.databasedemo.service.CourseService;
 import com.taihe.databasedemo.service.StudentService;
 import com.taihe.databasedemo.utils.Md5Util;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,11 +13,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
 import java.security.NoSuchAlgorithmException;
+import java.util.Calendar;
 import java.util.Map;
 
 @Controller
 public class StudentController {
-    Logger logger = LoggerFactory.getLogger(this.getClass());
+    //    Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     StudentService studentService;
     @Autowired
@@ -40,7 +39,9 @@ public class StudentController {
             map.put("name", validate.getName());
             map.put("loginId", validate.getLoginId().toString());
             map.put("sex", validate.getSex());
-            map.put("registerDate", String.valueOf(validate.getRegisterDate().getYear() + 1900));
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(validate.getRegisterDate());
+            map.put("registerDate", String.valueOf(calendar.get(Calendar.YEAR)));
             map.put("tuition", String.valueOf(validate.getTuition()));
             return "home";
         } else {
@@ -72,7 +73,9 @@ public class StudentController {
             map.put("name", student.getName());
             map.put("loginId", student.getLoginId().toString());
             map.put("sex", student.getSex());
-            map.put("registerDate", String.valueOf(student.getRegisterDate().getYear() + 1900));
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(student.getRegisterDate());
+            map.put("registerDate", String.valueOf(calendar.get(Calendar.YEAR)));
             map.put("tuition", String.valueOf(student.getTuition()));
 
         } else {
@@ -80,14 +83,17 @@ public class StudentController {
             map.put("name", student.getName());
             map.put("loginId", student.getLoginId().toString());
             map.put("sex", student.getSex());
-            map.put("registerDate", String.valueOf(student.getRegisterDate().getYear() + 1900));
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(student.getRegisterDate());
+            map.put("registerDate", String.valueOf(calendar.get(Calendar.YEAR)));
             map.put("tuition", String.valueOf(student.getTuition()));
 
         }
         return "home";
     }
+
     @GetMapping("/stulogout")
-    public String logout(HttpSession httpSession){
+    public String logout(HttpSession httpSession) {
         httpSession.removeAttribute("stuId");
         httpSession.removeAttribute("warnings");
         return "studentlogin";

@@ -31,4 +31,8 @@ public class CourseService {
     public void addCourse(Course course) {
         courseMapper.insertSelective(course);
     }
+
+    public int courseCount(Integer cid){
+        return courseMapper.courseCount(cid);
+    }
 }

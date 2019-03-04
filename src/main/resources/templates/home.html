@@ -260,12 +260,12 @@
                 return true;
             }
             else {
-                alert("密码过于简单，长度应在8位以上，且至少同时包含英文字母和数字！");
-                return false;//todo:
+                alert("请确认密码！");
+                return false;
             }
         }
         else {
-            alert("请确认密码！");
+             alert("密码过于简单，长度应在8位以上，且至少同时包含英文字母和数字！");
             return false;
         }
     }

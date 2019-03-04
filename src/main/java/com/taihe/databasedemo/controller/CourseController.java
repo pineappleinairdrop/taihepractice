@@ -51,7 +51,7 @@ public class CourseController {
     @PostMapping("/courseCount")
     @ResponseBody
     public String courseCount(Integer cid){
-        System.out.println(cid);
-        return String.valueOf(cid);
+
+        return String.valueOf(courseService.courseCount(cid));
     }
 }

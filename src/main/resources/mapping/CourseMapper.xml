@@ -104,9 +104,15 @@
         from course c
         where c.id in
         (
-        select teac.cid from teach teac where tid=#{tid,jdbcType=INTEGER}
+        select teac.cid
+        from teach teac
+        where tid=#{tid,jdbcType=INTEGER}
         )
     </select>
 
-
+    <select id="courseCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select count(id)
+        from take
+        where cid = #{cid}
+    </select>
 </mapper>

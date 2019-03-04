@@ -200,16 +200,6 @@ ul.tick li input[type="checkbox"] + label span:first-child {
     bottom: 4px;
 }
 
-ul.tick li input[type="checkbox"]:checked + label span:first-child:before {
-    content: "";
-    background: url(../img/tick.png) no-repeat;
-    position: absolute;
-    left: 3px;
-    top: 3px;
-    font-size: 10px;
-    width: 10px;
-    height: 10px;
-}
 
 .social-icons {
     margin-top: 20px;

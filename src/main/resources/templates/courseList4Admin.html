@@ -44,18 +44,21 @@
                         </thead>
                         <tbody>
                         <tr th:each="course,iterStat:${courseList}" th:id="'row'+${course.id}">
-                            <td class="id" th:text="${course.id}">1</td>
-                            <td th:text="${course.name}" th:id="'name'+${course.id}" >12</td>
-                            <td th:text="${course.credit}" th:id="'credit'+${course.id}">1</td>
+                            <td class="id" th:text="${course.id}"></td>
+                            <td th:text="${course.name}" th:id="'name'+${course.id}"></td>
+                            <td th:text="${course.credit}" th:id="'credit'+${course.id}"></td>
                             <td>
-                                <button class="btn-info"  data-toggle="modal"
+                                <button class="btn-info" data-toggle="modal"
                                         data-target="#modifyCourseModal">修改
                                 </button>
                                 &#12288&#12288
-                                <a class="btn-danger" th:id="'del'+${course.id}" th:href="@{'/deleteCourse/'+${course.id}}" target="sub_frame" >删除</a>
+                                <a class="btn-danger" th:id="'del'+${course.id}"
+                                   th:href="@{'/deleteCourse/'+${course.id}}" target="sub_frame">删除</a>
                                 &#12288
-                                <button type="button" class="btn btn-success" title="count"
-                                        data-container="body" th:id="'cnt'+${course.id}" data-toggle="popover" data-content="" data-placement="top">选课人数</button>
+                                <button type="button" class="btn btn-success " title="count"
+                                        data-container="body" data-toggle="popover" data-content=""
+                                        data-placement="top">选课人数
+                                </button>
                             </td>
                         </tr>
                         </tbody>
@@ -73,7 +76,7 @@
         </div>
     </div>
 </div>
-<iframe id="sub_frame" name="sub_frame" height="0" width="0" frameborder="0" marginheight="0" marginwidth="0" ></iframe>
+<iframe id="sub_frame" name="sub_frame" height="0" width="0" frameborder="0" marginheight="0" marginwidth="0"></iframe>
 <div class="modal fade" id="modifyCourseModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">
     <div class="modal-dialog">
@@ -91,8 +94,8 @@
                     <h3 class="text-center">修改记录</h3>
                     <div class="form-group hide">
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="id" name="id"
-                                   autofocus="autofocus" required=""/>
+                            <input type="text" title="id" class="form-control" id="id" name="id"
+                                   autofocus="autofocus" required="" readonly/>
                         </div>
                     </div>
                     <div class="form-group">
@@ -168,7 +171,7 @@
             $('#name' + id).text(newname);
             $('#credit' + id).text(newcredit);
         });
-        $("#modalSubmit").click(function(){
+        $("#modalSubmit").click(function () {
             $("#modifyCourseModal").modal('hide');
 
         });
@@ -182,16 +185,14 @@
             }
         });
         $('.btn-danger').click(function () {
-           var rid= $(this).parents('tr').find('.id').text();
-            $('#row'+rid).hide("slow");
+            var rid = $(this).parents('tr').find('.id').text();
+            $('#row' + rid).hide("slow");
         });
     });
 
 </script>
 <script>
-    $(function () {
-        $("[data-toggle='popover']").popover();
-    });
+    $("[data-toggle='popover']").popover();
     $("[data-toggle='popover']").on("show.bs.popover", function () {
         var data = $(this).parents('tr').find('.id').text();
         var htmlobj = $.ajax({
@@ -201,16 +202,14 @@
             data: {
                 cid: data
             }
-        });//todo:
-        $(this).attr("data-content",htmlobj.responseText)
+        });
+        $(this).attr("data-content", htmlobj.responseText)
     });
-
-    $("[data-toggle='popover']").on("shown.bs.popover",function(){
-        var _this=this;
-        $(document).one("click",function(){
+    $("[data-toggle='popover']").on("shown.bs.popover", function () {
+        var _this = this;
+        $(document).one("click", function () {
             $(_this).popover("hide");
         });
     });
-
 </script>
 </html>

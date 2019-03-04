@@ -54,7 +54,7 @@ public class AdminController {
     @PostMapping("/refreshStudentList")
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
-    public String refreshStudentList(HttpSession httpSession, HttpServletRequest request) {
+    public String refreshStudentList(/*HttpSession httpSession,*/ HttpServletRequest request) {
 
         DataTablePageUtil<Student> dataTable = new DataTablePageUtil<>(request);
         //PageHelper.startPage(dataTable.getPage_num(), dataTable.getPage_size());
@@ -87,7 +87,7 @@ public class AdminController {
     @PostMapping("/refreshTeacherList")
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
-    public String refreshTeacherList(HttpSession httpSession, HttpServletRequest request) {
+    public String refreshTeacherList(/*HttpSession httpSession,*/ HttpServletRequest request) {
 
         DataTablePageUtil<Teacher> dataTable = new DataTablePageUtil<>(request);
 

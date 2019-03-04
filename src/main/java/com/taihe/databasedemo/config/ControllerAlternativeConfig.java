@@ -24,4 +24,5 @@ public class ControllerAlternativeConfig implements WebMvcConfigurer {
         registry.addViewController("/newTeacher").setViewName("newTeacher");
 
     }
+
 }

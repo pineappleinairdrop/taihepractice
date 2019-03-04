@@ -6,10 +6,10 @@ import com.taihe.databasedemo.component.TeacherInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-public class InterceptorConfig extends WebMvcConfigurerAdapter {
+public class InterceptorConfig implements WebMvcConfigurer {
     @Bean
     public StudentInterceptor getStudentInterceptor() {
         return new StudentInterceptor();
@@ -21,23 +21,12 @@ public class InterceptorConfig extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public AdminInterceptor getAdminInterceptor(){
+    public AdminInterceptor getAdminInterceptor() {
         return new AdminInterceptor();
     }
+
     public void addInterceptors(InterceptorRegistry registry) {
-        super.addInterceptors(registry);
-        registry.addInterceptor(getStudentInterceptor())./*excludePathPatterns(
-                "/studentloginAction",
-                "/studentlogin",
-                "/adminlogin",
-                "/adminloginAction",
-                "/teacherlogin",
-                "teacherloginAction",
-                "/css/*",
-                "/js/*",
-                "/img/*",
-                "/"
-        ).*/addPathPatterns(
+        registry.addInterceptor(getStudentInterceptor()).addPathPatterns(
                 "/home",
                 "/deleteTaken/*",
                 "/doModifyPassword",
