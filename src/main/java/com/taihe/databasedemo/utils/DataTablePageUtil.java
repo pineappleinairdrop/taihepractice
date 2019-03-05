@@ -18,7 +18,7 @@ public class DataTablePageUtil<T> {
      * 告诉服务器每页显示的条数，这个数字会等于返回的 data集合的记录数，可能会大于因为服务器可能没有那么多数据。
      * 这个也可能是-1，代表需要返回全部数据(尽管这个和服务器处理的理念有点违背)
      */
-    private int length = 100; // 数据长度
+    private int length = 50; // 数据长度
 
     /*
      * 全局的搜索条件，条件会应用到每一列（ searchable需要设置为 true ）
@@ -139,7 +139,7 @@ public class DataTablePageUtil<T> {
     /*
      * 每页数据
      */
-    private int page_size = 100;
+    private int page_size = 50;
 
 
     public DataTablePageUtil() {
@@ -155,7 +155,9 @@ public class DataTablePageUtil<T> {
         String draw = request.getParameter("draw");
 
         this.setStart(Integer.parseInt(start));
+
         this.setLength(Integer.parseInt(length));
+
         this.setDraw(Integer.parseInt(draw));
         //计算页码
         this.page_num = (Integer.parseInt(start) / Integer.parseInt(length)) + 1;

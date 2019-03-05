@@ -1,8 +1,8 @@
 server:
   port: 8080
 spring:
-  thymeleaf:
-    cache: false
+#  thymeleaf:
+#    cache: false
   #数据源配置
   datasource:
     url: jdbc:mysql://172.30.100.21:3308/hxl?useSSL=false&characterEncoding=utf8
@@ -27,6 +27,6 @@ mybatis:
   configuration:
     use-column-label: true
     map-underscore-to-camel-case: true
-pagehelper:
-  reasonable: true
+#pagehelper:
+#  reasonable: true
 adminpassword: admin

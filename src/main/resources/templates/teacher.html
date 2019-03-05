@@ -54,15 +54,6 @@
                         </li>
                     </ul>
                 </li>
-                <li>
-                    <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">反馈管理</span><span
-                            class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a class="J_menuItem" th:href="@{/feedbackList}">反馈列表</a>
-                        </li>
-                    </ul>
-                </li>
             </ul>
         </div>
     </nav>
@@ -260,7 +251,7 @@
             }
         }
         else {
-            alert("密码过于简单，长度应在8位以上，且至少同时包含英文字母和数字！");
+            alert("密码过于简单，长度应在8位及以上，且至少同时包含英文字母和数字！");
             return false;
         }
     }

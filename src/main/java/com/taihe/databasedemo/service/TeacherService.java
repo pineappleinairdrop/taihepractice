@@ -34,6 +34,9 @@ public class TeacherService {
         return teacherMapper.selectByPage(start + 1, end);
     }
 
+    public int maxId(){
+        return teacherMapper.maxId();
+    }
 
     public void addTeacher(String name) {
         Teacher teacher = new Teacher();

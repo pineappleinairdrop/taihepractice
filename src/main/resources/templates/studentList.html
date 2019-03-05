@@ -36,7 +36,6 @@
                     </div>
                 </div>
                 <div class="ibox-content">
-
                     <table class="table table-striped table-bordered table-hover" id="studentList">
                         <thead>
                         <tr>
@@ -83,7 +82,7 @@
             language: {
                 "lengthMenu": " _MENU_ 记录/页",
                 "zeroRecords": " ",
-                "info": "当前 _START_ 条到 _END_ 条 共 _TOTAL_ 条",
+                "info": "",
                 "infoEmpty": "无记录",
                 "infoFiltered": "(从 _MAX_ 条记录过滤)",
                 // "search": "用户",
@@ -106,16 +105,14 @@
                 {data: "sex"},// <th>性别</th>
                 {data: "tuition"},// <th>学费</th>
                 {
-                    data: "registerDate",render: function (data) {
-                        // Sep 1, 2016
-                        return data.substring(8,11);
+                    data: "registerDate", render: function (data) {
+                        //Sep 1, 2016
+                        return data.substring(8, 11); // <th>年级</th>
                     }
-                } // <th>年级</th>
+                }
             ]
         });
-
     });
-
 </script>
 </body>
 </html>

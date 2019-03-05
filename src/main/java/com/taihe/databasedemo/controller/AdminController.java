@@ -15,7 +15,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -65,7 +67,8 @@ public class AdminController {
 
         dataTable.setDraw(dataTable.getDraw());
         dataTable.setData(studentList);//studentPageInfo.getList()
-        dataTable.setRecordsTotal(studentService.maxId() / 10 + 1);
+        int pagenum = studentService.maxId();
+        dataTable.setRecordsTotal(pagenum % 5 == 0 ? (pagenum / 5) : (pagenum / 5 + 1));
         dataTable.setRecordsFiltered(dataTable.getRecordsTotal());
 
         return new Gson().toJson(dataTable);
@@ -98,7 +101,8 @@ public class AdminController {
 
         dataTable.setDraw(dataTable.getDraw());
         dataTable.setData(teacherList);//studentPageInfo.getList()
-        dataTable.setRecordsTotal(studentService.maxId() / 100 + 1);
+        int pagenum = teacherService.maxId();
+        dataTable.setRecordsTotal(pagenum % 5 == 0 ? (pagenum / 5) : (pagenum / 5 + 1));
         dataTable.setRecordsFiltered(dataTable.getRecordsTotal());
 
         return new Gson().toJson(dataTable);
@@ -108,8 +112,11 @@ public class AdminController {
     String adminpassword;
 
     @PostMapping("/adminloginAction")
-    public String adminlogin(String password, Model model,HttpSession httpSession) {
+    public String adminlogin(String password, Model model, HttpSession httpSession, HttpServletResponse response) {
+
         if (password.equals(adminpassword)) {
+//            Cookie identity=new Cookie("admin","true");
+//            response.addCookie(identity);//todo:cookie replace
             httpSession.setAttribute("admin", Boolean.TRUE);
             return "admin";
         } else {
@@ -117,11 +124,13 @@ public class AdminController {
             return "adminlogin";
         }
     }
+
     @GetMapping("/adminlogout")
-    public String adminLogout(HttpSession httpSession){
+    public String adminLogout(HttpSession httpSession) {
         httpSession.removeAttribute("admin");
         return "adminlogin";
     }
+
     @PostMapping("/addTeacher")
     public String addTeacher(String name) {
         teacherService.addTeacher(name);
